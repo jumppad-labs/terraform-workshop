@@ -1,0 +1,27 @@
+{
+    "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
+    "editor.minimap.enabled": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "files.associations": {
+        "*.hcl": "hcl",
+        "*.tf": "terraform"
+    },
+    "workbench.iconTheme": "file-icons-colourless",
+    "editor.scrollBeyondLastLine": false,
+    "editor.tabSize": 4,
+    "terminal.integrated.fontFamily": "Hack",
+    "editor.suggestSelection": "first",
+    "terminal.integrated.tabs.enabled": false,
+    "[hcl]": {
+        "editor.formatOnSave": true,
+    },
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true
+    },
+    "terraform.codelens.referenceCount": true,
+    "terraform.languageServer.enable": true,
+    "terraform.experimentalFeatures.validateOnSave": true,
+    "terraform.experimentalFeatures.prefillRequiredFields": true,
+    "editor.accessibilitySupport": "off",
+}
