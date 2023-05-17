@@ -4,16 +4,25 @@ The terraform destroy command is a convenient way to destroy all remote objects 
 
 While you will typically not want to destroy long-lived objects in a production environment, Terraform is sometimes used to manage ephemeral infrastructure for development purposes, in which case you can use terraform destroy to conveniently clean up all of those temporary objects once you are finished with your work.
 
-<Task>
+<Task id="workflow/terraform_destroy">
   <Instructions>
     Clean up the environment by running `terraform destroy`.
   </Instructions>
   <Conditions>
     <Condition 
       id="destroy_command" 
-      target="vscode"
+      target="vscode.container.jumppad.dev"
       description="Use the terraform destroy command" 
     />
-    <Condition description="" />
+    <Condition 
+      id="state_empty" 
+      target="vscode.container.jumppad.dev"
+      description="The Terraform state is empty" 
+    />
+    <Condition 
+      id="docker_empty" 
+      target="vscode.container.jumppad.dev"
+      description="The Docker resources are removed"
+    />
   </Conditions>
 </Task>

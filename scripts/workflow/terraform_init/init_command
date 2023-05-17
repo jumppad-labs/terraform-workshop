@@ -5,5 +5,5 @@ validate history contains --match-line "terraform init" \
   || validate fail "'terraform init' command was not used to initialize the working directory"
 
 # Is the terraform dependency lock file created?
-validate file exists "$HOME/terraform_basics/.terraform.lock.hcl" \
+validate file exists "/terraform_basics/.terraform.lock.hcl" \
   || validate fail "'.terraform.lock.hcl' file does not exist"

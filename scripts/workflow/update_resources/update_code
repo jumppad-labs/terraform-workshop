@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+# Check that docker.tf exists
+validate file exists "/terraform_basics/docker.tf" \
+  || validate fail "'/terraform_basics/docker.tf' file does not exist"
+
+# Check that the version is updated in docker.tf
+validate file contains /terraform_basics/docker.tf '"vault:1.13.2"' \
+  || validate fail "The version of the vault image has not been updated to 1.13.2"

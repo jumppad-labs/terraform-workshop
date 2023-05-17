@@ -1,0 +1,3 @@
+#!/bin/bash -e
+validate history contains "terraform show -json" \
+  || validate fail "The terraform state was not viewed in a machine-readable format such as JSON"

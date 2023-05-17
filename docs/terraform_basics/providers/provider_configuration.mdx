@@ -21,12 +21,15 @@ A provider's documentation should list which configuration arguments it expects.
 
 Unlike many other objects in the Terraform language, a provider block may be omitted if its contents would otherwise be empty. Terraform assumes an empty default configuration for any provider that is not explicitly configured.
 
-<Task>
+<Task id="providers/provider_configuration">
   <Instructions>
-    Instructions
+    Add a provider configuration block for the vault provider that sets the address to `http://localhost:8200`. 
   </Instructions>
   <Conditions>
-    <Condition status="success" description="The resource is destroyed" />
-    <Condition status="fail" description="The state does not contain the resource" />
+    <Condition 
+      id="configuration_added"
+      target="vscode.container.jumppad.dev"
+      description="The provider configuration is added"
+    />
   </Conditions>
 </Task>

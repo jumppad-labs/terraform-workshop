@@ -22,12 +22,20 @@ If you don't specify a file path, Terraform will show the latest state snapshot.
 
 You can get machine-readable output by adding the `-json` command-line flag.
 
-<Task>
+<Task id="state/viewing_state">
   <Instructions>
-    Instructions
+    Use the Terraform CLI to view the Terraform state in a machine-readable format.
   </Instructions>
   <Conditions>
-    <Condition status="success" description="The resource is destroyed" />
-    <Condition status="fail" description="The state does not contain the resource" />
+    <Condition 
+      id="show_command"
+      target="vscode.container.jumppad.dev"
+      description="The Terraform state is viewed"
+    />
+    <Condition 
+      id="json_flag"
+      target="vscode.container.jumppad.dev"
+      description="The state is in a machine-readable format" 
+    />
   </Conditions>
 </Task>

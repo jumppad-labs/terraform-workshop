@@ -21,12 +21,15 @@ Patterns are in [resource addressing format](https://developer.hashicorp.com/ter
   </Property>
 </Properties>
 
-<Task>
+<Task id="state/list_state">
   <Instructions>
-    Instructions
+    List all the resources in the state.
   </Instructions>
   <Conditions>
-    <Condition status="success" description="The resource is destroyed" />
-    <Condition status="fail" description="The state does not contain the resource" />
+    <Condition 
+      id="list_command"
+      target="vscode.container.jumppad.dev"
+      description="The state for all resources is listed"
+    />
   </Conditions>
 </Task>

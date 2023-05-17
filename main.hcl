@@ -40,8 +40,18 @@ resource "container" "vscode" {
   }
 
   volume {
+    source = "${dir()}/scripts"
+    destination = "/var/lib/jumppad/"
+  }
+
+  volume {
     source = data("terraform")
     destination = "/terraform_basics"
+  }
+
+  volume {
+    source = "/var/run/docker.sock"
+    destination = "/var/run/docker.sock"
   }
 
   environment = {
@@ -54,5 +64,11 @@ resource "container" "vscode" {
     local = 8000
     remote = 8000
     host = 8000
+  }
+
+  health_check {
+    timeout = "60s"
+    http = "http://vscode.container.jumppad.dev:8000/"
+    http_success_codes = [403,302]
   }
 }

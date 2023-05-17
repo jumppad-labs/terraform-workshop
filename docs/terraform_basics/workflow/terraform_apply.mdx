@@ -6,15 +6,25 @@ When you run terraform apply without passing a saved plan file, Terraform automa
 
 You can pass the -auto-approve option to instruct Terraform to apply the plan without asking for confirmation.
 
-<Task>
+<Task id="workflow/terraform_apply">
   <Instructions>
     Run `terraform apply` to execute the actions proposed in the Terraform plan.
   </Instructions>
   <Conditions>
     <Condition 
       id="apply_command" 
-      target="vscode"
+      target="vscode.container.jumppad.dev"
       description="Use the terraform apply command" 
+    />
+    <Condition 
+      id="state_updated" 
+      target="vscode.container.jumppad.dev"
+      description="The Terraform state contains the resources"
+    />
+    <Condition 
+      id="docker_updated" 
+      target="vscode.container.jumppad.dev"
+      description="The Docker resources are created" 
     />
   </Conditions>
 </Task>

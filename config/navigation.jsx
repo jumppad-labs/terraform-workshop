@@ -1,8 +1,8 @@
 export const navigation = [
   {
-    title: 'Index',
+    title: 'Introduction',
     links: [
-      { title: 'Index', href: '/' },
+      { title: 'Introduction', href: '/' },
     ]
   },
   {
@@ -37,5 +37,11 @@ export const navigation = [
       { title: 'List state', href: '/terraform_basics/state/list_state' },
       { title: 'Show state', href: '/terraform_basics/state/show_state' },
     ]
-  }
+  },
+  {
+    title: 'Summary',
+    links: [
+      { title: 'Summary', href: '/terraform_basics/summary' },
+    ]
+  },
 ]

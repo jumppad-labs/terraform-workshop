@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+# Is the docker vault image present in the state?
+terraform -chdir="/terraform_basics" show -json | jq -e '.values.root_module.resources | map(select(.address == "docker_image.vault" and .values.name == "vault:1.12.6")) | length == 1' > /dev/null \
+  || validate fail "docker_image.vault not found in terraform state"
+
+# Is the docker vault container present in the state?
+terraform -chdir="/terraform_basics" show -json | jq -e '.values.root_module.resources | map(select(.address == "docker_container.vault" and .values.name == "terraform-basics-vault")) | length == 1' > /dev/null \
+  || validate fail "docker_container.vault not found in terraform state"

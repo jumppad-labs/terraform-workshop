@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+# Is the vault provider initialized?
+validate file contains /terraform_basics/.terraform.lock.hcl 'provider "registry.terraform.io/hashicorp/vault" {' \
+  || validate fail "the vault provider was not correctly initialized"

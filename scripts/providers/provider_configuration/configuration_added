@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+validate file contains /terraform_basics/main.tf "address = \"http://localhost:8200\"" \
+  || validate fail "The provider configuration does not specify the Vault address"

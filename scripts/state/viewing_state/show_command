@@ -1,0 +1,3 @@
+#!/bin/bash -e
+validate history contains "terraform show" \
+  || validate fail "The terraform show command was not used to view the state"
