@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Check that the provider was added
+validate file contains /terraform_basics/main.tf '"hashicorp/vault"'

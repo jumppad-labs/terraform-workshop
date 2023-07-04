@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Is the docker vault container present in the state?
+terraform -chdir="/terraform_basics" show -json | jq -e '.values.root_module.resources | map(select(.address == "docker_container.vault" and .values.name == "terraform-basics-vault")) | length == 1' > /dev/null

@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+# Is the docker vault container running?
+IMAGE_ID=$(docker image inspect vault:1.12.6 | jq -r '.[0].Id' | cut -d ':' -f 2 | awk '{print substr($0,1,12)}')
+docker ps --format '{{json .}}' | jq -s -e --arg image "$IMAGE_ID" '. | map(select(.Image == $image and .Names == "terraform-basics-vault" and .State == "running")) | length == 1' > /dev/null

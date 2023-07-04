@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Check that the terraform apply command is executed
+validate history contains "terraform destroy"

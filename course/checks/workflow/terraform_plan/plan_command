@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Is the 'terraform plan' command used?
+validate history contains "terraform plan"
