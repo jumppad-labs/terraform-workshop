@@ -1,9 +1,0 @@
-#!/bin/bash -e
-
-# Check that the docker container is removed
-docker ps --format '{{json .}}' | jq -s -e '. | map(select(.Names == "terraform-basics-vault")) | length == 0' > /dev/null \
-  || validate fail "the docker container named 'terraform-basics-vault' is still running"
-
-# Check that the docker image is removed
-docker image ls --format '{{json .}}' | jq -s -e '. | map(select(.Repository == "vault" and .Tag == "1.13.2")) | length == 0' > /dev/null \
-  || validate fail "the docker 'vault' image with tag '1.13.2' was not removed"

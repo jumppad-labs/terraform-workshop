@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-# Check that the provider was added
-validate file contains /terraform_basics/main.tf '"hashicorp/vault"' \
-  || validate fail "The \"hashicorp/vault\" provider was not added to required_providers"

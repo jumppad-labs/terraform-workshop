@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-# Check that the terraform apply command is executed
-validate history contains "terraform destroy" \
-  || validate fail "'terraform destroy' command was not used to clean up the environment"

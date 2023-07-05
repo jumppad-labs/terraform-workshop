@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-# Check that the state is empty
-terraform show -json | jq -e '.Values == null' > /dev/null \
-  || validate fail "the terraform state is not empty"

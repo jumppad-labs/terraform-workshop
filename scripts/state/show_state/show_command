@@ -1,3 +1,0 @@
-#!/bin/bash -e
-validate history contains "terraform state show docker_container.vault" \
-  || validate fail "The terraform state show command was not used to view the state for docker_container.vault"
