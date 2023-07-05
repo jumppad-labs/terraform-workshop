@@ -50,9 +50,6 @@ resource "docs" "docs" {
   content = [
     module.course.output.book
   ]
-
-  path = "${dir()}/docs"
-  navigation_file = "${dir()}/config/navigation.jsx"
 }
 
 module "course" {
@@ -105,7 +102,9 @@ resource "container" "vscode" {
 
   health_check {
     timeout = "60s"
-    http = "http://vscode.container.jumppad.dev:8000/"
-    http_success_codes = [403,302]
+    http {
+      address = "http://vscode.container.jumppad.dev:8000/"
+      success_codes = [403,302]
+    }
   }
 }
