@@ -6,6 +6,8 @@ Providers can also offer local utilities for tasks like generating random number
 Each provider adds a set of [resource types](https://developer.hashicorp.com/terraform/language/resources) and/or [data sources](https://developer.hashicorp.com/terraform/language/data-sources) that Terraform can manage.
 Every resource type is implemented by a provider; without providers, Terraform can't manage any kind of infrastructure.
 
+<Video id="MJIcYDfCACE"/>
+
 ```
 slideware
 what are providers?
@@ -23,6 +25,8 @@ Some providers on the Registry are developed and published by HashiCorp, some ar
 Terraform CLI finds and installs providers when [initializing a working directory](https://developer.hashicorp.com/terraform/cli/init). 
 It can automatically download providers from a Terraform registry, or load them from a local mirror or cache. 
 If you are using a persistent working directory, you must reinitialize whenever you change a configuration's providers.
+
+<Video id="xO1_FhFfgbQ"/>
 
 ```
 where do I get providers?
@@ -75,6 +79,8 @@ If a lock file is present, Terraform Cloud, CLI, and Enterprise will all obey it
 
 The dependency lock file is a file that belongs to the configuration as a whole, rather than to each separate module in the configuration. 
 For that reason Terraform creates it and expects to find it in your current working directory when you run Terraform, which is also the directory containing the `.tf` files for the root module of your configuration.
+
+<Video id="eX51ziztMQc"/>
 
 <Task id="install_provider">
   Add the `vault` provider to the current Terraform configuration and initialize the workspace.
