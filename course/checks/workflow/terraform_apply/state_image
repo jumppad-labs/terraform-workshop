@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Is the docker vault image present in the state?
+terraform -chdir="/terraform_basics" show -json | jq -e '.values.root_module.resources | map(select(.address == "docker_image.vault" and .values.name == "vault:1.12.6")) | length == 1' > /dev/null

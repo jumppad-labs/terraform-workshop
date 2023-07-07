@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Check that the new image is pulled
+docker image ls --format '{{json .}}' | jq -s -e '. | map(select(.Repository == "vault" and .Tag == "1.13.2")) | length == 1' > /dev/null

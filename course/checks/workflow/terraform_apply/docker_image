@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+# Is the docker vault image present?
+docker image ls --format '{{json .}}' | jq -s -e '. | map(select(.Repository == "vault" and .Tag == "1.12.6")) | length == 1' > /dev/null

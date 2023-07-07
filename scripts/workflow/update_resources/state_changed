@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-# Check that the the new version is updated in the state
-terraform -chdir="/terraform_basics" show -json | jq -e '.values.root_module.resources | map(select(.address == "docker_image.vault" and .values.name == "vault:1.13.2")) | length == 1' > /dev/null \
-  || validate fail "The Terraform state does not contain the updated resources"

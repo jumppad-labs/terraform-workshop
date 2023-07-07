@@ -1,0 +1,33 @@
+# Update resources
+
+Infrastructure is continuously evolving, and Terraform helps you manage that change. 
+As you change Terraform configurations, Terraform builds an execution plan that only modifies what is necessary to reach your desired state.
+
+When doing a `terraform plan`, Terraform will tell you the changes it plans to make.
+The prefix -/+ means that Terraform will destroy and recreate the resource, rather than updating it in-place. 
+Terraform can update some attributes in-place (indicated with the ~ prefix), but changing others requires recreating resources. 
+Terraform handles these details for you, and the execution plan displays what Terraform will do.
+
+Additionally, the execution plan shows which changes force Terraform to replace a resource. 
+Using this information, you can adjust your changes to to avoid destructive updates if necessary.
+
+After changing the configuration, you can run terraform apply again to see how Terraform will apply this change to the existing resources.
+
+<Video id="oc4RspW7Ijw"/>
+
+<Task id="update_resources">
+  Change the version of the `vault` image from `1.12.6` to `1.13.2` and apply the changes.
+</Task>
+
+```
+start in blank terminal
+show the code
+show that we have vault 1.12.6 image & container
+edit the code
+run terraform plan
+talk about output
+run terraform apply -auto-approve
+talk about what is happening in the background
+talk about output
+show the resources that terraform created (docker image, docker container)
+```
