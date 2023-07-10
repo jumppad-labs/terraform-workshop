@@ -70,7 +70,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/vscode:base-v0.1.0"
+    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.1.0"
   }
 
   volume {
@@ -81,6 +81,11 @@ resource "container" "vscode" {
   volume {
     source = data("terraform")
     destination = "/terraform_basics"
+  }
+
+  volume {
+    source = "${dir()}/settings"
+    destination = "/root/.local/share/code-server/Machine"
   }
 
   volume {
@@ -104,7 +109,7 @@ resource "container" "vscode" {
     timeout = "60s"
     http {
       address = "http://vscode.container.jumppad.dev:8000/"
-      success_codes = [403,302]
+      success_codes = [200,302,403]
     }
   }
 }

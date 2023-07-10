@@ -1,4 +1,5 @@
 {
+    "workbench.colorTheme": "Visual Studio Dark",
     "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
     "editor.minimap.enabled": false,
     "workbench.startupEditor": "newUntitledFile",
