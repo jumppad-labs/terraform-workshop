@@ -83,9 +83,14 @@ resource "container" "vscode" {
     destination = "/terraform_basics"
   }
 
+  // volume {
+  //   source = "${dir()}/settings"
+  //   destination = "/root/.local/share/code-server/Machine"
+  // }
+
   volume {
     source = "${dir()}/settings"
-    destination = "/root/.local/share/code-server/Machine"
+    destination = "/terraform_basics/.vscode"
   }
 
   volume {
