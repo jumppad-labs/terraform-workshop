@@ -17,6 +17,10 @@ backend {
 }
 */
 
+variable "docs_url" {
+  default = "http://localhost"
+}
+
 variable "vscode_token" {
   default = "token"
 }
@@ -52,6 +56,21 @@ resource "docs" "docs" {
   ]
 }
 
+resource "template" "vscode_jumppad" {
+  source = <<-EOF
+  {
+  "tabs": [
+    {
+      "title": "Docs",
+      "uri": "${variable.docs_url}"
+    }
+  ],
+  "terminals": []
+}
+  EOF
+  destination = "${data("vscode")}/shipyard.json"
+}
+
 module "course" {
   source = "${dir()}/course"
 
@@ -83,14 +102,9 @@ resource "container" "vscode" {
     destination = "/terraform_basics"
   }
 
-  // volume {
-  //   source = "${dir()}/settings"
-  //   destination = "/root/.local/share/code-server/Machine"
-  // }
-
   volume {
-    source = "${dir()}/settings"
-    destination = "/terraform_basics/.vscode"
+    source = "${data("vscode")}/shipyard.json"
+    destination = "/terraform_basics/.vscode/shipyard.json"
   }
 
   volume {
