@@ -29,8 +29,8 @@ resource "network" "main" {
   subnet = "10.10.0.0/16"
 }
 
-resource "copy" "workspace" {  
-  source = "./workspace"  
+resource "copy" "workspace" {
+  source      = "./workspace"
   destination = data("terraform")
   permissions = "0755"
 }
@@ -57,7 +57,7 @@ resource "docs" "docs" {
 }
 
 resource "template" "vscode_jumppad" {
-  source = <<-EOF
+  source      = <<-EOF
   {
   "tabs": [
     {
@@ -75,7 +75,7 @@ module "course" {
   source = "${dir()}/course"
 
   variables = {
-    terraform_target = resource.container.vscode.id
+    terraform_target  = resource.container.vscode.id
     working_directory = "/terraform_basics"
 
     // future idea
@@ -93,42 +93,42 @@ resource "container" "vscode" {
   }
 
   volume {
-    source = "${dir()}/scripts"
+    source      = "${dir()}/scripts"
     destination = "/var/lib/jumppad/"
   }
 
   volume {
-    source = data("terraform")
+    source      = data("terraform")
     destination = "/terraform_basics"
   }
 
   volume {
-    source = "${data("vscode")}/shipyard.json"
+    source      = resource.template.vscode_jumppad.destination
     destination = "/terraform_basics/.vscode/shipyard.json"
   }
 
   volume {
-    source = "/var/run/docker.sock"
+    source      = "/var/run/docker.sock"
     destination = "/var/run/docker.sock"
   }
 
   environment = {
-    EXTENSIONS = "hashicorp.hcl,hashicorp.terraform"
+    EXTENSIONS       = "hashicorp.hcl,hashicorp.terraform"
     CONNECTION_TOKEN = variable.vscode_token
-    DEFAULT_FOLDER = "/terraform_basics"
+    DEFAULT_FOLDER   = "/terraform_basics"
   }
 
   port {
-    local = 8000
+    local  = 8000
     remote = 8000
-    host = 8000
+    host   = 8000
   }
 
   health_check {
     timeout = "60s"
     http {
-      address = "http://vscode.container.jumppad.dev:8000/"
-      success_codes = [200,302,403]
+      address       = "http://vscode.container.jumppad.dev:8000/"
+      success_codes = [200, 302, 403]
     }
   }
 }
