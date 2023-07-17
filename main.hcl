@@ -66,7 +66,7 @@ resource "template" "vscode_jumppad" {
     }
   ],
   "terminals": []
-}
+  }
   EOF
   destination = "${data("vscode")}/shipyard.json"
 }
@@ -75,7 +75,7 @@ module "course" {
   source = "${dir()}/course"
 
   variables = {
-    terraform_target  = resource.container.vscode.id
+    terraform_target  = "resource.container.vscode"
     working_directory = "/terraform_basics"
 
     // future idea
@@ -83,7 +83,18 @@ module "course" {
   }
 }
 
+resource "local_exec" "docs" {
+  depends_on = ["resource.docs.docs"]
+  command = [
+    "./scripts/startup_check.sh"
+  ]
+
+  timeout = "120s"
+}
+
 resource "container" "vscode" {
+  depends_on = ["resource.local_exec.docs"]
+
   network {
     id = resource.network.main.id
   }
