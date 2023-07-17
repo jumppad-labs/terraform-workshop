@@ -42,7 +42,7 @@ resource "docs" "docs" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/docs:v0.0.2"
+    name = "ghcr.io/jumppad-labs/docs:v0.0.4"
   }
 
   /* 
