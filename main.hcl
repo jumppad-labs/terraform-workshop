@@ -68,7 +68,7 @@ resource "template" "vscode_jumppad" {
   "terminals": [
     {
       "command": "",
-      "name": "terraform"
+      "name": "bash"
     }
   ]
   }
@@ -105,7 +105,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.1.0"
+    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.0"
   }
 
   volume {
