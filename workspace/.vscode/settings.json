@@ -25,4 +25,5 @@
     "terraform.experimentalFeatures.validateOnSave": true,
     "terraform.experimentalFeatures.prefillRequiredFields": true,
     "editor.accessibilitySupport": "off",
+    "terminal.integrated.defaultLocation": "editor"
 }

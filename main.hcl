@@ -65,7 +65,12 @@ resource "template" "vscode_jumppad" {
       "uri": "${variable.docs_url}"
     }
   ],
-  "terminals": []
+  "terminals": [
+    {
+      "command": "",
+      "name": "terraform"
+    }
+  ]
   }
   EOF
   destination = "${data("vscode")}/shipyard.json"
