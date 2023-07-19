@@ -67,13 +67,13 @@ resource "template" "vscode_jumppad" {
   ],
   "terminals": [
     {
-      "command": "",
       "name": "bash"
+      "location": "editor"
     }
   ]
   }
   EOF
-  destination = "${data("vscode")}/shipyard.json"
+  destination = "${data("vscode")}/workspace.json"
 }
 
 module "course" {
@@ -105,7 +105,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.0"
+    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.1.0"
   }
 
   volume {
@@ -120,7 +120,7 @@ resource "container" "vscode" {
 
   volume {
     source      = resource.template.vscode_jumppad.destination
-    destination = "/terraform_basics/.vscode/shipyard.json"
+    destination = "/terraform_basics/.vscode/workspace.json"
   }
 
   volume {
