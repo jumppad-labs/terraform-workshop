@@ -34,14 +34,10 @@ jobs:
         uses: hashicorp/setup-packer@main
         id: setup
 
-      - name: Run `packer init`
-        id: init
-        run: "packer init packer/image.pkr.hcl"
-
-      - name: Run `packer validate`
-        id: validate
-        run: "packer validate packer/image.pkr.hcl"
-      
-      - name: Run `packer build`
+      - name: Run `packer`
         id: build
-        run: "packer build packer/image.pkr.hcl"
+        run: |
+          cd packer
+          packer init image.pkr.hcl
+          packer validate image.pkr.hcl
+          packer build image.pkr.hcl
