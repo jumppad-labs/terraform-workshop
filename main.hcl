@@ -61,7 +61,7 @@ resource "template" "vscode_jumppad" {
   {
   "tabs": [
     {
-      "title": "Docs",
+      "name": "Docs",
       "uri": "${variable.docs_url}",
       "type": "browser",
       "active": true
@@ -106,7 +106,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.0"
+    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.1"
   }
 
   volume {
