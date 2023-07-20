@@ -106,7 +106,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.1"
+    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.2"
   }
 
   volume {
