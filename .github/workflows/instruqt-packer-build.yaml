@@ -29,6 +29,7 @@ jobs:
       - name: export credentials
         id: export
         run: |
+          echo $pwd
           mkdir -p /.secrets
           echo "${{ secrets.GCP_TOKEN }}" > /.secrets/.gcp.json
 
