@@ -29,7 +29,7 @@ jobs:
       - name: export credentials
         id: export
         run: |
-          mkdir -p .packer/.secrets
+          mkdir -p packer/.secrets
           echo "${{ secrets.GCP_TOKEN }}" > packer/.secrets/.gcp.json
 
       - name: Setup `packer`
