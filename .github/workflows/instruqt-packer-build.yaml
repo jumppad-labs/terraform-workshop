@@ -2,9 +2,6 @@ name: Build Packer Image for GCP
 on:
   push
 
-env:
-  GOOGLE_APPLICATION_CREDENTIALS: .secrets/.gcp.json
-
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -25,12 +22,14 @@ jobs:
         if: steps.check_for_changes.outputs.CHANGE_COUNT != '0'
         run: |
           echo "changes: ${{ steps.check_for_changes.outputs.CHANGE_COUNT }} event: ${{ github.event_name }}"
-      
-      - name: export credentials
-        id: export
-        run: |
-          mkdir -p packer/.secrets
-          echo ${{ secrets.GCP_TOKEN }} > packer/.secrets/.gcp.json
+
+      - id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_TOKEN }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
