@@ -27,7 +27,7 @@ jobs:
           echo "changes: ${{ steps.check_for_changes.outputs.CHANGE_COUNT }} event: ${{ github.event_name }}"
       
       - name: export credentials
-        id: init
+        id: export
         run: echo "${secrets.GCP_TOKEN}" > .gcp.json
 
       - name: Setup `packer`
