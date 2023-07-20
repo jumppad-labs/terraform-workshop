@@ -24,18 +24,22 @@ jobs:
           echo "changes: ${{ steps.check_for_changes.outputs.CHANGE_COUNT }} event: ${{ github.event_name }}"
 
       - id: auth
+        if: steps.check_for_changes.outputs.CHANGE_COUNT != '0'
         uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.GCP_TOKEN }}'
 
       - name: Set up Cloud SDK
+        if: steps.check_for_changes.outputs.CHANGE_COUNT != '0'
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Setup `packer`
+        if: steps.check_for_changes.outputs.CHANGE_COUNT != '0'
         uses: hashicorp/setup-packer@main
         id: setup
 
       - name: Run `packer`
+        if: steps.check_for_changes.outputs.CHANGE_COUNT != '0'
         id: build
         run: |
           cd packer
