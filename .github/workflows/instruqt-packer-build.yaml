@@ -1,0 +1,47 @@
+name: Build Packer Image for GCP
+on:
+  push
+
+env:
+  GOOGLE_APPLICATION_CREDENTIALS: .gcp.json
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+
+      - name: Check for changes
+        id: check_for_changes
+        run: |
+          echo "CHANGE_COUNT=$(git diff --name-only  HEAD^ HEAD | grep 'packer' | wc -l)" >> "$GITHUB_OUTPUT"
+
+      - name: Info
+        if: steps.check_for_changes.outputs.CHANGE_COUNT != '0'
+        run: |
+          echo "changes: ${{ steps.check_for_changes.outputs.CHANGE_COUNT }} event: ${{ github.event_name }}"
+      
+      - name: export credentials
+        id: init
+        run: echo "${secrets.GCP_TOKEN}" > .gcp.json
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+
+      - name: Run `packer init`
+        id: init
+        run: "packer init packer/image.pkr.hcl"
+
+      - name: Run `packer validate`
+        id: validate
+        run: "packer validate packer/image.pkr.hcl"
+      
+      - name: Run `packer build`
+        id: build
+        run: "packer build packer/image.pkr.hcl"
