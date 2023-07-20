@@ -3,7 +3,7 @@ on:
   push
 
 env:
-  GOOGLE_APPLICATION_CREDENTIALS: .gcp.json
+  GOOGLE_APPLICATION_CREDENTIALS: /.secrets/.gcp.json
 
 jobs:
   build-and-release:
@@ -28,7 +28,9 @@ jobs:
       
       - name: export credentials
         id: export
-        run: echo "${{ secrets.GCP_TOKEN }}" > .gcp.json
+        run: |
+          mkdir -p /.secrets
+          echo "${{ secrets.GCP_TOKEN }}" > /.secrets/.gcp.json
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
