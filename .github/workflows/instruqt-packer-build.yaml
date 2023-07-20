@@ -28,7 +28,7 @@ jobs:
       
       - name: export credentials
         id: export
-        run: echo "${secrets.GCP_TOKEN}" > .gcp.json
+        run: echo "${{ secrets.GCP_TOKEN }}" > .gcp.json
 
       - name: Setup `packer`
         uses: hashicorp/setup-packer@main
