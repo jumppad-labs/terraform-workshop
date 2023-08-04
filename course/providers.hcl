@@ -24,6 +24,7 @@ resource "task" "install_provider" {
   condition "provider_added" {
     description = "The vault provider is added to the code"
     check = file("${dir()}/checks/providers/install_provider/provider_added")
+    solve = file("${dir()}/checks/providers/install_provider/solve")
     failure_message = "The \"hashicorp/vault\" provider was not added to required_providers"
     target = variable.terraform_target
   }
@@ -44,6 +45,7 @@ resource "task" "provider_configuration" {
   condition "configuration_added" {
     description = "The provider configuration is added"
     check = file("${dir()}/checks/providers/provider_configuration/configuration_added")
+    solve = file("${dir()}/checks/providers/provider_configuration/solve")
     failure_message = "The provider configuration does not specify the Vault address"
     target = variable.terraform_target
   }

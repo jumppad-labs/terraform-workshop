@@ -1,0 +1,7 @@
+#!/bin/bash -e
+TERRAFORM_LATEST=$(curl --fail --silent --show-error https://api.releases.hashicorp.com/v1/releases/terraform/latest | jq -r .version)
+
+curl -L -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST}/terraform_${TERRAFORM_LATEST}_linux_amd64.zip
+unzip terraform.zip
+rm terraform.zip
+mv terraform /usr/bin/terraform

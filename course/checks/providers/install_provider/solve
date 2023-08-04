@@ -1,0 +1,22 @@
+#!/bin/bash -e
+cat <<EOF > /terraform_basics/main.tf
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0"
+    }
+
+    vault = {
+      source = "hashicorp/vault"
+      version = "~> 3.0"
+    }
+  }
+}
+
+provider "docker" {}
+
+provider "vault" {}
+EOF
+
+terraform init

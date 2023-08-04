@@ -1,0 +1,2 @@
+#!/bin/bash -e
+terraform plan -chdir /terraform_basics

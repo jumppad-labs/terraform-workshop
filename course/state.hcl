@@ -32,6 +32,7 @@ resource "task" "viewing_state" {
   condition "show_command" {
     description = "The Terraform state is viewed"
     check = file("${dir()}/checks/state/viewing_state/show_command")
+    solve = file("${dir()}/checks/state/viewing_state/solve")
     failure_message = "The terraform show command was not used to view the state"
     target = variable.terraform_target
   }
@@ -52,6 +53,7 @@ resource "task" "list_state" {
   condition "list_command" {
     description = "The state for all resources is listed"
     check = file("${dir()}/checks/state/list_state/list_command")
+    solve = file("${dir()}/checks/state/list_state/solve")
     failure_message = "The terraform state list command was not used"
     target = variable.terraform_target
   }
@@ -65,6 +67,7 @@ resource "task" "show_state" {
   condition "show_command" {
     description = "The state of the Vault Docker container was shown"
     check = file("${dir()}/checks/state/show_state/show_command")
+    solve = file("${dir()}/checks/state/show_state/solve")
     failure_message = "The terraform state show command was not used to view the state for docker_container.vault"
     target = variable.terraform_target
   }

@@ -48,6 +48,7 @@ resource "task" "terraform_init" {
   condition "init_command" {
     description = "The terraform_basics working directory is initialized"
     check = file("${dir()}/checks/workflow/terraform_init/init_command")
+    solve = file("${dir()}/checks/workflow/terraform_init/solve")
     failure_message = "'terraform init' command was not used to initialize the working directory"
     target = variable.terraform_target
   }
@@ -75,6 +76,7 @@ resource "task" "terraform_plan" {
   condition "plan_command" {
     description = "Use the terraform plan command"
     check = file("${dir()}/checks/workflow/terraform_plan/plan_command")
+    solve = file("${dir()}/checks/workflow/terraform_plan/solve")
     failure_message = "'terraform plan' command was not used to preview changes"
     target = variable.terraform_target
   }
@@ -88,6 +90,7 @@ resource task "terraform_apply" {
   condition "apply_command" {
     description = "Use the terraform apply command"
     check = file("${dir()}/checks/workflow/terraform_apply/apply_command")
+    solve = file("${dir()}/checks/workflow/terraform_apply/solve")
     failure_message = "'terraform apply' command was not used to apply changes"
     target = variable.terraform_target
   }
@@ -129,6 +132,7 @@ resource "task" "update_resources" {
   condition "update_code" {
     description = "Change the version of the vault image"
     check = file("${dir()}/checks/workflow/update_resources/update_code")
+    solve = file("${dir()}/checks/workflow/update_resources/solve")
     failure_message = "The version of the vault image has not been updated to 1.13.2"
     target = variable.terraform_target
   }
@@ -163,6 +167,7 @@ resource "task" "terraform_destroy" {
   condition "destroy_command" {
     description = "Use the terraform destroy command"
     check = file("${dir()}/checks/workflow/terraform_destroy/destroy_command")
+    solve = file("${dir()}/checks/workflow/terraform_destroy/solve")
     failure_message = "'terraform destroy' command was not used to clean up the environment"
     target = variable.terraform_target
   }
