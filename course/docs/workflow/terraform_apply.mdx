@@ -1,12 +1,19 @@
 # Terraform apply
 
-The `terraform apply` command executes the actions proposed in a Terraform plan.
-
-When you run terraform apply without passing a saved plan file, Terraform automatically creates a new execution plan as if you had run terraform plan, prompts you to approve that plan, and takes the indicated actions. You can use all of the planning modes and planning options to customize how Terraform will create the plan.
-
-You can pass the -auto-approve option to instruct Terraform to apply the plan without asking for confirmation.
+<Intro>In this section we will create resources using Terraform.</Intro>
 
 <Video id="7BVkOEUZn8M"/>
+
+The `terraform apply` command executes the actions proposed in a Terraform plan.
+
+When you run terraform apply without passing a saved plan file, Terraform automatically creates a new execution plan as if you had run terraform plan. 
+Terraform then prompts you to approve that plan `Do you want to approve these actions?`. And after confirming with "yes" it takes the indicated actions. 
+
+You can pass the `-auto-approve` option to instruct Terraform to apply the plan without asking for confirmation.
+
+If we look at the current Docker images (`docker images`) and containers (`docker ps`) we can see that we have nothing pulled and running.
+Once we execute `terraform apply` we can see that Terraform is pulling the `vault:1.12.6` image and afterwards creates the `terraform-basics-vault` Docker container, using that image.
+If we again look at the Docker images and containers, we can now see them there.
 
 <Task id="terraform_apply">
   Run `terraform apply` to execute the actions proposed in the Terraform plan.

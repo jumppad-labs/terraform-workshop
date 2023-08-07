@@ -1,5 +1,9 @@
 # Provider configuration
 
+<Intro>In this section we will configure the installed Terraform providers.</Intro>
+
+<Video id="uyiihjFCW5o"/>
+
 Some providers require you to configure them with endpoint URLs, cloud regions, or other settings before Terraform can use them. This page documents how to configure settings for providers.
 
 Provider configurations belong in the root module of a Terraform configuration. (Child modules receive their provider configurations from the root module; for more information, see The Module providers Meta-Argument and Module Development: Providers Within Modules.)
@@ -20,8 +24,6 @@ The body of the block (between \{ and \}) contains configuration arguments for t
 A provider's documentation should list which configuration arguments it expects. For providers distributed on the Terraform Registry, versioned documentation is available on each provider's page, via the "Documentation" link in the provider's header.
 
 Unlike many other objects in the Terraform language, a provider block may be omitted if its contents would otherwise be empty. Terraform assumes an empty default configuration for any provider that is not explicitly configured.
-
-<Video id="uyiihjFCW5o"/>
 
 <Task id="provider_configuration">
   Add a provider configuration block for the vault provider that sets the address to `http://localhost:8200`. 

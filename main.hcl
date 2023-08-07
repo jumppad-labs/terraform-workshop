@@ -51,9 +51,17 @@ resource "docs" "docs" {
   mounts the library to a volume
   */
 
+  logo {
+    url = "https://companieslogo.com/img/orig/HCP.D-be08ca6f.png"
+    width = 32
+    height = 32
+  }
+
   content = [
     module.course.output.book
   ]
+
+ assets = "${dir()}/assets"
 }
 
 resource "template" "vscode_jumppad" {

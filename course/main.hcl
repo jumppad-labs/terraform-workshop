@@ -16,9 +16,20 @@ resource "book" "terraform_basics" {
 }
 
 resource "chapter" "introduction" {
-  page "introduction" {
-    title = "Introduction"
-    content = file("${dir()}/docs/index.mdx")
+  title = "Introduction"
+  page "what_is_terraform" {
+    title = "What is Terraform?"
+    content = file("${dir()}/docs/introduction/what_is_terraform.mdx")
+  }
+
+  page "what_will_you_learn" {
+    title = "What will you learn?"
+    content = file("${dir()}/docs/introduction/what_will_you_learn.mdx")
+  }
+
+  page "workshow_environment" {
+    title = "Workshop environment"
+    content = file("${dir()}/docs/introduction/workshop_environment.mdx")
   }
 }
 

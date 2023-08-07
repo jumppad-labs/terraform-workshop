@@ -1,21 +1,18 @@
 # Finding and installing providers
 
+<Intro>In this section we will search for Terraform providers and install them.</Intro>
+
+<Video id="MJIcYDfCACE"/>
+
 Terraform relies on plugins called providers to interact with cloud providers, SaaS providers, and other APIs.
 Providers can also offer local utilities for tasks like generating random numbers for unique resource names.
 
 Each provider adds a set of [resource types](https://developer.hashicorp.com/terraform/language/resources) and/or [data sources](https://developer.hashicorp.com/terraform/language/data-sources) that Terraform can manage.
 Every resource type is implemented by a provider; without providers, Terraform can't manage any kind of infrastructure.
 
-<Video id="MJIcYDfCACE"/>
-
-```
-slideware
-what are providers?
-how does terraform use/interact with providers?
-how do providers interact with interfaces/services/apis
-```
-
 ### Terraform registry
+
+<Video id="xO1_FhFfgbQ"/>
 
 Providers are distributed separately from Terraform itself, and each provider has its own release cadence and version numbers.
 To find providers for the infrastructure platforms you use, browse the [providers section of the Terraform Registry](https://registry.terraform.io/browse/providers). 
@@ -25,14 +22,6 @@ Some providers on the Registry are developed and published by HashiCorp, some ar
 Terraform CLI finds and installs providers when [initializing a working directory](https://developer.hashicorp.com/terraform/cli/init). 
 It can automatically download providers from a Terraform registry, or load them from a local mirror or cache. 
 If you are using a persistent working directory, you must reinitialize whenever you change a configuration's providers.
-
-<Video id="xO1_FhFfgbQ"/>
-
-```
-where do I get providers?
-show terraform registry
-show how to find a provider (docker)
-```
 
 ### Required providers
 
@@ -70,17 +59,17 @@ In production we recommend constraining the acceptable provider versions in the 
 
 The version argument is optional; if omitted, Terraform will accept any version of the provider as compatible. 
 However, we strongly recommend specifying a version constraint for every provider your module depends on.
-Version constraints can specify a specific version or use [operators](https://developer.hashicorp.com/terraform/language/expressions/version-constraints) such as `>=` and `~>` to specify version ranges.
+Version constraints can specify a specific version or use <a href="https://developer.hashicorp.com/terraform/language/expressions/version-constraints" target="_blank">operators</a> such as `>=` and `~>` to specify version ranges.
 
 ### Dependency lock file
+
+<Video id="eX51ziztMQc"/>
 
 To ensure Terraform always installs the same provider versions for a given configuration, you can use Terraform CLI to create a dependency lock file and commit it to version control along with your configuration. 
 If a lock file is present, Terraform Cloud, CLI, and Enterprise will all obey it when installing providers.
 
 The dependency lock file is a file that belongs to the configuration as a whole, rather than to each separate module in the configuration. 
 For that reason Terraform creates it and expects to find it in your current working directory when you run Terraform, which is also the directory containing the `.tf` files for the root module of your configuration.
-
-<Video id="eX51ziztMQc"/>
 
 <Task id="install_provider">
   Add the `vault` provider to the current Terraform configuration and initialize the workspace.
