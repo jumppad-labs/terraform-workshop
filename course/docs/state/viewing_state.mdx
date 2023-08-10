@@ -1,5 +1,9 @@
 # Viewing state
 
+<Intro>In this section we will use `terraform show` to view Terraform state.</Intro>
+
+<Video id="1r2NKPkscOc"/>
+
 Terraform must store state about your managed infrastructure and configuration. 
 This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures.
 
@@ -12,9 +16,9 @@ When Terraform creates a remote object in response to a change of configuration,
 While the format of the state files are just JSON, direct file editing of the state is discouraged. 
 Terraform provides the `terraform state` command to perform basic modifications of the state using the CLI.
 
-<Video id="1r2NKPkscOc"/>
-
 ### Terraform show
+
+<Video id="CRBjDXbHdik"/>
 
 The `terraform show` command is used to provide human-readable output from a state or plan file. 
 This can be used to inspect a plan to ensure that the planned operations are expected, or to inspect the current state as Terraform sees it.
@@ -23,8 +27,6 @@ You may use show with a path to either a Terraform state file or plan file.
 If you don't specify a file path, Terraform will show the latest state snapshot.
 
 You can get machine-readable output by adding the `-json` command-line flag.
-
-<Video id="CRBjDXbHdik"/>
 
 <Task id="viewing_state">
   Use the Terraform CLI to view the Terraform state in a machine-readable format.
