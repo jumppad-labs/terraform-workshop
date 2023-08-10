@@ -58,7 +58,7 @@ resource "docs" "docs" {
   }
 
   content = [
-    // module.course.output.book
+    module.course.output.book
   ]
 
  assets = "${dir()}/assets"

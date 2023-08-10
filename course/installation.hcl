@@ -15,6 +15,8 @@ resource "chapter" "installation" {
 }
 
 resource "task" "manual_installation" {
+  prerequisites = []
+  
   config {
     user = "root"
     target = variable.terraform_target

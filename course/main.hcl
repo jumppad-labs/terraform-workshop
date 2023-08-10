@@ -35,6 +35,6 @@ resource "chapter" "summary" {
   }
 }
 
-// output "book" {
-//   value = resource.book.terraform_basics
-// }
+output "book" {
+  value = resource.book.terraform_basics
+}

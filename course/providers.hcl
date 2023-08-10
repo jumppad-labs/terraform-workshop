@@ -13,6 +13,13 @@ resource "chapter" "providers" {
 }
 
 resource "task" "install_provider" {
+  // prerequisites = [
+  //   resource.task.terraform_init.id,
+  //   resource.task.terraform_plan.id,
+  //   resource.task.terraform_apply.id,
+  //   resource.task.update_resources.id,
+  //   resource.task.terraform_destroy.id
+  // ]
   prerequisites = resource.chapter.workflow.tasks != null ? values(resource.chapter.workflow.tasks).*.id : []
 
   config {

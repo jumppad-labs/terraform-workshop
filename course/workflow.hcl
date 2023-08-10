@@ -19,6 +19,11 @@ resource "chapter" "workflow" {
 }
 
 resource "task" "terraform_init" {
+  // prerequisites = [
+  //   resource.task.manual_installation.id,
+  //   resource.task.verify_installation.id,
+  //   resource.task.terraform_version.id
+  // ]
   prerequisites = resource.chapter.installation.tasks != null ? values(resource.chapter.installation.tasks).*.id : []
 
   config {

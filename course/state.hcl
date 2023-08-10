@@ -15,7 +15,11 @@ resource "chapter" "state" {
 }
 
 resource "task" "viewing_state" {
-  prerequisites = resource.chapter.state.tasks != null ? values(resource.chapter.state.tasks).*.id : []
+  // prerequisites = [
+  //   resource.task.install_provider.id,
+  //   resource.task.provider_configuration.id
+  // ]
+  prerequisites = resource.chapter.providers.tasks != null ? values(resource.chapter.providers.tasks).*.id : []
 
   config {
     user = "root"
