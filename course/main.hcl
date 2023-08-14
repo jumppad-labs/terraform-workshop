@@ -20,18 +20,24 @@ resource "chapter" "introduction" {
 
   tasks = {}
 
-  pages = {
-    what_is_terraform = "docs/introduction/what_is_terraform.mdx"
-    what_will_you_learn = "docs/introduction/what_will_you_learn.mdx"
-    workshow_environment = "docs/introduction/workshop_environment.mdx"
+  page "what_is_terraform" {
+    content = file("docs/introduction/what_is_terraform.mdx")
+  }
+
+  page "what_will_you_learn" {
+    content = file("docs/introduction/what_will_you_learn.mdx")
+  }
+
+  page "workshow_environment" {
+    content = file("docs/introduction/workshop_environment.mdx")
   }
 }
 
 resource "chapter" "summary" {
   tasks = {}
 
-  pages = {
-    summary = "docs/summary.mdx"
+  page "summary" {
+    content = file("docs/summary.mdx")
   }
 }
 

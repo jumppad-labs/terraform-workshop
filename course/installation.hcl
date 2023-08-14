@@ -7,10 +7,16 @@ resource "chapter" "installation" {
     terraform_version = resource.task.terraform_version
   }
 
-  pages = {
-    manual_installation = "docs/installation/manual_installation.mdx"
-    verify_installation = "docs/installation/verify_installation.mdx"
-    terraform_version = "docs/installation/terraform_version.mdx"
+  page "manual_installation" {
+    content = file("docs/installation/manual_installation.mdx")
+  }
+
+  page "verify_installation" {
+    content = file("docs/installation/verify_installation.mdx")
+  }
+  
+  page "terraform_version" {
+    content = file("docs/installation/terraform_version.mdx")
   }
 }
 

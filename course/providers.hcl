@@ -6,20 +6,16 @@ resource "chapter" "providers" {
     provider_configuration = resource.task.provider_configuration
   }
 
-  pages = {
-    install_provider = "docs/providers/install_provider.mdx"
-    provider_configuration = "docs/providers/provider_configuration.mdx"
+  page "install_provider" {
+    content = file("docs/providers/install_provider.mdx")
+  }
+
+  page "provider_configuration" {
+    content = file("docs/providers/provider_configuration.mdx")
   }
 }
 
 resource "task" "install_provider" {
-  // prerequisites = [
-  //   resource.task.terraform_init.id,
-  //   resource.task.terraform_plan.id,
-  //   resource.task.terraform_apply.id,
-  //   resource.task.update_resources.id,
-  //   resource.task.terraform_destroy.id
-  // ]
   prerequisites = resource.chapter.workflow.tasks != null ? values(resource.chapter.workflow.tasks).*.id : []
 
   config {

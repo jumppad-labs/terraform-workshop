@@ -9,21 +9,28 @@ resource "chapter" "workflow" {
     terraform_destroy = resource.task.terraform_destroy
   }
 
-  pages = {
-    terraform_init = "docs/workflow/terraform_init.mdx"
-    terraform_plan = "docs/workflow/terraform_plan.mdx"
-    terraform_apply = "docs/workflow/terraform_apply.mdx"
-    update_resources = "docs/workflow/update_resources.mdx"
-    terraform_destroy = "docs/workflow/terraform_destroy.mdx"
+  page "terraform_init" {
+    content = file("docs/workflow/terraform_init.mdx")
+  }
+
+  page "terraform_plan" {
+    content = file("docs/workflow/terraform_plan.mdx")
+  }
+
+  page "terraform_apply" {
+    content = file("docs/workflow/terraform_apply.mdx")
+  }
+
+  page "update_resources" {
+    content = file("docs/workflow/update_resources.mdx")
+  }
+
+  page "terraform_destroy" {
+    content = file("docs/workflow/terraform_destroy.mdx")
   }
 }
 
 resource "task" "terraform_init" {
-  // prerequisites = [
-  //   resource.task.manual_installation.id,
-  //   resource.task.verify_installation.id,
-  //   resource.task.terraform_version.id
-  // ]
   prerequisites = resource.chapter.installation.tasks != null ? values(resource.chapter.installation.tasks).*.id : []
 
   config {

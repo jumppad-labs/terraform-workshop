@@ -7,18 +7,20 @@ resource "chapter" "state" {
     show_state = resource.task.show_state
   }
 
-  pages = {
-    viewing_state = "docs/providers/viewing_state.mdx"
-    list_state = "docs/providers/list_state.mdx"
-    show_state = "docs/providers/show_state.mdx"
+  page "viewing_state" {
+    content = file("docs/state/viewing_state.mdx")
+  }
+
+  page "list_state" {
+    content = file("docs/state/list_state.mdx")
+  }
+
+  page "show_state" {
+    content = file("docs/state/show_state.mdx")
   }
 }
 
 resource "task" "viewing_state" {
-  // prerequisites = [
-  //   resource.task.install_provider.id,
-  //   resource.task.provider_configuration.id
-  // ]
   prerequisites = resource.chapter.providers.tasks != null ? values(resource.chapter.providers.tasks).*.id : []
 
   config {
