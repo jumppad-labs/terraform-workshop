@@ -25,15 +25,25 @@ resource "task" "install_provider" {
 
   condition "provider_added" {
     description = "The vault provider is added to the code"
-    check = file("${dir()}/checks/providers/install_provider/provider_added")
-    solve = file("${dir()}/checks/providers/install_provider/solve")
-    failure_message = "The \"hashicorp/vault\" provider was not added to required_providers"
+
+    check {
+      script = file("checks/providers/install_provider/provider_added")
+      failure_message = "The \"hashicorp/vault\" provider was not added to required_providers"
+    }
+
+    solve {
+      script = file("checks/providers/install_provider/solve")
+      timeout = 120
+    }
   }
 
   condition "provider_installed" {
     description = "The vault provider is installed"
-    check = file("${dir()}/checks/providers/install_provider/provider_installed")
-    failure_message = "the vault provider was not correctly initialized"
+
+    check {
+      script = file("checks/providers/install_provider/provider_installed")
+      failure_message = "the vault provider was not correctly initialized"
+    }
   }
 }
 
@@ -49,8 +59,14 @@ resource "task" "provider_configuration" {
 
   condition "configuration_added" {
     description = "The provider configuration is added"
-    check = file("${dir()}/checks/providers/provider_configuration/configuration_added")
-    solve = file("${dir()}/checks/providers/provider_configuration/solve")
-    failure_message = "The provider configuration does not specify the Vault address"
+
+    check {
+      script = file("checks/providers/provider_configuration/configuration_added")
+      failure_message = "The provider configuration does not specify the Vault address"
+    }
+
+    solve {
+      script = file("checks/providers/provider_configuration/solve")
+    }
   }
 }

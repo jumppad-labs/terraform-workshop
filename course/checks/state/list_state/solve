@@ -1,2 +1,2 @@
 #!/bin/bash -e
-terraform state list -chdir /terraform_basics
+terraform -chdir=/terraform_basics state list

@@ -30,9 +30,16 @@ resource "task" "manual_installation" {
 
   condition "binary_exists" {
     description = "Terraform installed on path"
-    check = file("${dir()}/checks/installation/manual_installation/binary_exists")
-    solve = file("${dir()}/checks/installation/manual_installation/solve")
-    failure_message = "terraform binary not found on the PATH"
+
+    check {
+      script = file("checks/installation/manual_installation/binary_exists")
+      failure_message = "terraform binary not found on the PATH"
+    }
+
+    solve {
+      script = file("checks/installation/manual_installation/solve")
+      timeout = 60
+    }
   }
 
   // condition "version_command" {
@@ -48,8 +55,11 @@ resource "task" "manual_installation" {
 
   condition "latest_version" {
     description = "Terraform binary is the latest version"
-    check = template_file("${dir()}/checks/installation/manual_installation/version_latest", { name = "terraform"})
-    failure_message = "terraform binary is not the latest version"
+
+    check {
+      script = template_file("checks/installation/manual_installation/version_latest", { name = "terraform"})
+      failure_message = "terraform binary is not the latest version"
+    }
   }
 }
 
@@ -65,9 +75,15 @@ resource "task" "verify_installation" {
 
   condition "help_command" {
     description = "Use the terraform -help command"
-    solve = file("${dir()}/checks/installation/verify_installation/solve")
-    check = file("${dir()}/checks/installation/verify_installation/help_command")
-    failure_message = "'terraform -help' command was not used to explore the possibilities of the CLI"
+
+    check {
+      script = file("checks/installation/verify_installation/help_command")
+      failure_message = "'terraform -help' command was not used to explore the possibilities of the CLI"
+    }
+
+    solve {
+      script = file("checks/installation/verify_installation/solve")
+    }
   }
 }
 
@@ -83,8 +99,14 @@ resource "task" "terraform_version" {
 
   condition  "version_command" {
     description = "Use the terraform version command"
-    check = file("${dir()}/checks/installation/terraform_version/version_command")
-    solve = file("${dir()}/checks/installation/terraform_version/solve")
-    failure_message = "'terraform version' command was not used to validate the installed version"
+
+    check {
+      script = file("checks/installation/terraform_version/version_command")
+      failure_message = "'terraform version' command was not used to validate the installed version"
+    }
+
+    solve {
+      script = file("checks/installation/terraform_version/solve")
+    }
   }
 }

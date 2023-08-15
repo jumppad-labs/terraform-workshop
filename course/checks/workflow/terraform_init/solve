@@ -1,2 +1,2 @@
 #!/bin/bash -e
-terraform init -chdir /terraform_basics
+terraform -chdir=/terraform_basics init

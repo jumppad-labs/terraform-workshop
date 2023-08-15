@@ -40,21 +40,34 @@ resource "task" "terraform_init" {
 
   condition "init_command" {
     description = "The terraform_basics working directory is initialized"
-    check = file("${dir()}/checks/workflow/terraform_init/init_command")
-    solve = file("${dir()}/checks/workflow/terraform_init/solve")
-    failure_message = "'terraform init' command was not used to initialize the working directory"
+
+    check {
+      script = file("checks/workflow/terraform_init/init_command")
+      failure_message = "'terraform init' command was not used to initialize the working directory"
+    }
+
+    solve {
+      script = file("checks/workflow/terraform_init/solve")
+      timeout = 120
+    }
   }
 
   condition "dependency_lock_file" {
     description = "The terraform lock file has been created"
-    check = file("${dir()}/checks/workflow/terraform_init/dependency_lock_file")
-    failure_message = "'.terraform.lock.hcl' file does not exist"
+
+    check {
+      script = file("checks/workflow/terraform_init/dependency_lock_file")
+      failure_message = "'.terraform.lock.hcl' file does not exist"
+    }
   }
 
   condition "docker_provider" {
     description = "The Docker provider is initialized"
-    check = file("${dir()}/checks/workflow/terraform_init/docker_provider")
-    failure_message = "the docker provider was not correctly initialized"
+
+    check {
+      script = file("checks/workflow/terraform_init/docker_provider")
+      failure_message = "the docker provider was not correctly initialized"
+    }
   }
 }
 
@@ -70,9 +83,15 @@ resource "task" "terraform_plan" {
 
   condition "plan_command" {
     description = "Use the terraform plan command"
-    check = file("${dir()}/checks/workflow/terraform_plan/plan_command")
-    solve = file("${dir()}/checks/workflow/terraform_plan/solve")
-    failure_message = "'terraform plan' command was not used to preview changes"
+
+    check {
+      script = file("checks/workflow/terraform_plan/plan_command")
+      failure_message = "'terraform plan' command was not used to preview changes"
+    }
+
+    solve {
+      script = file("checks/workflow/terraform_plan/solve")
+    }
   }
 }
 
@@ -88,33 +107,52 @@ resource task "terraform_apply" {
 
   condition "apply_command" {
     description = "Use the terraform apply command"
-    check = file("${dir()}/checks/workflow/terraform_apply/apply_command")
-    solve = file("${dir()}/checks/workflow/terraform_apply/solve")
-    failure_message = "'terraform apply' command was not used to apply changes"
+    
+    check {
+      script = file("checks/workflow/terraform_apply/apply_command")
+      failure_message = "'terraform apply' command was not used to apply changes"
+    }
+
+    solve {
+      script = file("checks/workflow/terraform_apply/solve")
+      timeout = 300
+    }
   }
 
   condition "state_image" {
     description = "The Terraform state contains the Docker image"
-    check = file("${dir()}/checks/workflow/terraform_apply/state_image")
-    failure_message = "docker_image.vault not found in terraform state"
+
+    check {
+      script = file("checks/workflow/terraform_apply/state_image")
+      failure_message = "docker_image.vault not found in terraform state"
+    }
   }
 
    condition "state_container" {
     description = "The Terraform state contains the Docker container"
-    check = file("${dir()}/checks/workflow/terraform_apply/state_container")
-    failure_message = "docker_container.vault not found in terraform state"
+
+    check {
+      script = file("checks/workflow/terraform_apply/state_container")
+      failure_message = "docker_container.vault not found in terraform state"
+    }
   }
 
   condition "docker_image" {
     description = "The Docker image is created"
-    check = file("${dir()}/checks/workflow/terraform_apply/docker_image")
-    failure_message = "the docker \"vault\" image with tag \"1.12.6\" was not pulled"
+
+    check {
+      script = file("checks/workflow/terraform_apply/docker_image")
+      failure_message = "the docker \"vault\" image with tag \"1.12.6\" was not pulled"
+    }
   }
 
   condition "docker_container" {
     description = "The Docker container is running"
-    check = file("${dir()}/checks/workflow/terraform_apply/docker_container")
-    failure_message = "the docker container named \"terraform-basics-vault\" is not running"
+
+    check {
+      script = file("checks/workflow/terraform_apply/docker_container")
+      failure_message = "the docker container named \"terraform-basics-vault\" is not running"
+    }
   }
 }
 
@@ -130,27 +168,43 @@ resource "task" "update_resources" {
 
   condition "update_code" {
     description = "Change the version of the vault image"
-    check = file("${dir()}/checks/workflow/update_resources/update_code")
-    solve = file("${dir()}/checks/workflow/update_resources/solve")
-    failure_message = "The version of the vault image has not been updated to 1.13.2"
+
+    check {
+      script = file("checks/workflow/update_resources/update_code")
+      failure_message = "The version of the vault image has not been updated to 1.12.7"
+    }
+
+    solve {
+      script = file("checks/workflow/update_resources/solve")
+      timeout = 300
+    }
   }
 
   condition "state_changed" {
     description = "The Terraform state is updated"
-    check = file("${dir()}/checks/workflow/update_resources/state_changed")
-    failure_message = "The Terraform state does not contain the updated resources"
+
+    check {
+      script = file("checks/workflow/update_resources/state_changed")
+      failure_message = "The Terraform state does not contain the updated resources"
+    }
   }
 
   condition "docker_image" {
     description = "The Docker image is updated"
-    check = file("${dir()}/checks/workflow/update_resources/docker_image")
-    failure_message = "the docker 'vault' image with tag '1.13.2' was not pulled"
+
+    check {
+      script = file("checks/workflow/update_resources/docker_image")
+      failure_message = "the docker 'vault' image with tag '1.12.7' was not pulled"
+    }
   }
 
   condition "docker_container" {
     description = "The Docker container is running"
-    check = file("${dir()}/checks/workflow/update_resources/docker_container")
-    failure_message = "the docker container named 'terraform-basics-vault' is not running"
+
+    check {
+      script = file("checks/workflow/update_resources/docker_container")
+      failure_message = "the docker container named 'terraform-basics-vault' is not running"
+    }
   }
 }
 
@@ -166,26 +220,41 @@ resource "task" "terraform_destroy" {
 
   condition "destroy_command" {
     description = "Use the terraform destroy command"
-    check = file("${dir()}/checks/workflow/terraform_destroy/destroy_command")
-    solve = file("${dir()}/checks/workflow/terraform_destroy/solve")
-    failure_message = "'terraform destroy' command was not used to clean up the environment"
+
+    check {
+      script = file("checks/workflow/terraform_destroy/destroy_command")
+      failure_message = "'terraform destroy' command was not used to clean up the environment"
+    }
+
+    solve {
+      script = file("checks/workflow/terraform_destroy/solve")
+    }
   }
 
   condition "state_empty" {
     description = "The Terraform state is empty"
-    check = file("${dir()}/checks/workflow/terraform_destroy/state_empty")
-    failure_message = "the terraform state is not empty"
+
+    check {
+      script = file("checks/workflow/terraform_destroy/state_empty")
+      failure_message = "the terraform state is not empty"
+    }
   }
 
   condition "docker_container" {
     description = "The Docker container is removed"
-    check = file("${dir()}/checks/workflow/terraform_destroy/docker_container")
-    failure_message = "the docker container named 'terraform-basics-vault' is still running"
+
+    check {
+      script = file("checks/workflow/terraform_destroy/docker_container")
+      failure_message = "the docker container named 'terraform-basics-vault' is still running"
+    }
   }
 
   condition "docker_image" {
     description = "The Docker container is removed"
-    check = file("${dir()}/checks/workflow/terraform_destroy/docker_image")
-    failure_message = "the docker 'vault' image with tag '1.13.2' was not removed"
+
+    check {
+      script = file("checks/workflow/terraform_destroy/docker_image")
+      failure_message = "the docker 'vault' image with tag '1.12.7' was not removed"
+    }
   }
 }

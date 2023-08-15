@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
 # Check that the docker image is removed
-docker image ls --format '{{json .}}' | jq -s -e '. | map(select(.Repository == "vault" and .Tag == "1.13.2")) | length == 0' > /dev/null
+docker image ls --format '{{json .}}' | jq -s -e '. | map(select(.Repository == "vault" and .Tag == "1.12.7")) | length == 0' > /dev/null

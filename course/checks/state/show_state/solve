@@ -1,2 +1,2 @@
 #!/bin/bash -e
-terraform state show docker_container.vault -chdir /terraform_basics
+terraform -chdir=/terraform_basics state show docker_container.vault

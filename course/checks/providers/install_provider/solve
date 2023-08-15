@@ -19,4 +19,4 @@ provider "docker" {}
 provider "vault" {}
 EOF
 
-terraform init
+terraform -chdir=/terraform_basics init
