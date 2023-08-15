@@ -42,7 +42,7 @@ resource "docs" "docs" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/docs:v0.1.0"
+    name = "ghcr.io/jumppad-labs/docs:v0.2.0"
   }
 
   /* 
@@ -51,11 +51,11 @@ resource "docs" "docs" {
   mounts the library to a volume
   */
 
-  logo {
-    url = "https://companieslogo.com/img/orig/HCP.D-be08ca6f.png"
-    width = 32
-    height = 32
-  }
+  // logo {
+  //   url = "https://companieslogo.com/img/orig/HCP.D-be08ca6f.png"
+  //   width = 32
+  //   height = 32
+  // }
 
   content = [
     module.course.output.book

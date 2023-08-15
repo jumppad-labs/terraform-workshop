@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
 # Check that the version is updated in docker.tf
-validate file contains /terraform_basics/docker.tf '"vault:1.13.2"'
+validate file contains /terraform_basics/docker.tf '"vault:1.12.7"'

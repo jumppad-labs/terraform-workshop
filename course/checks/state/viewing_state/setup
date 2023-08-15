@@ -1,2 +1,3 @@
 #!/bin/bash -e
+terraform -chdir=/terraform_basics init
 terraform -chdir=/terraform_basics apply -auto-approve
