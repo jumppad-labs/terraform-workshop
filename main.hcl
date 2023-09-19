@@ -35,7 +35,18 @@ resource "copy" "workspace" {
   permissions = "0755"
 }
 
-// rename to documentation
+module "course" {
+  source = "${dir()}/course"
+
+  variables = {
+    terraform_target  = "resource.container.vscode"
+    working_directory = "/terraform_basics"
+
+    // future idea
+    // working_directory = resource.container.vscode.volume.workdir.destination
+  }
+}
+
 resource "docs" "docs" {
   network {
     id = resource.network.main.id
@@ -85,30 +96,7 @@ resource "template" "vscode_jumppad" {
   destination = "${data("vscode")}/workspace.json"
 }
 
-module "course" {
-  source = "${dir()}/course"
-
-  variables = {
-    terraform_target  = "resource.container.vscode"
-    working_directory = "/terraform_basics"
-
-    // future idea
-    // working_directory = resource.container.vscode.volume.workdir.destination
-  }
-}
-
-resource "local_exec" "docs" {
-  depends_on = ["resource.docs.docs"]
-  command = [
-    "./scripts/startup_check.sh"
-  ]
-
-  timeout = "120s"
-}
-
 resource "container" "vscode" {
-  depends_on = ["resource.local_exec.docs"]
-
   network {
     id = resource.network.main.id
   }
@@ -148,11 +136,17 @@ resource "container" "vscode" {
     remote = 8000
     host   = 8000
   }
-
+  
   health_check {
-    timeout = "60s"
+    timeout = "120s"
+    
     http {
-      address       = "http://vscode.container.jumppad.dev:8000/"
+      address       = "http://localhost/docs/terraform_basics/introduction/what_is_terraform"
+      success_codes = [200]
+    }
+
+    http {
+      address       = "http://localhost:8000/"
       success_codes = [200, 302, 403]
     }
   }

@@ -1,0 +1,25 @@
+name: Run Functional Tests
+on:
+  push
+
+jobs:
+  functional_tests:
+    name: Functional Test Docker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
+      
+      - name: Install Jumppad
+        run: |
+          curl https://jumppad.dev/install | bash
+      
+      - name: Run tests
+        run: |
+          jumppad check
+          jumppad purge
+          jumppad test .
