@@ -20,8 +20,11 @@ jobs:
       
       - name: Run tests
         run: |
-          jumppad check
-          jumppad purge
           LOG_LEVEL=debug jumppad test --dont-destroy . | true
+      
+      - name: Show Logs
+        if: failure()
+        run: |
           docker ps -a
+          docker images
           docker logs docs.docs.jumppad.dev
