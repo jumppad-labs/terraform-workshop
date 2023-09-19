@@ -10,4 +10,4 @@ Scenario: Start docs
     | resource.container.vscode                |
     | resource.docs.docs                       |
   And a HTTP call to "http://localhost/" should result in status 200
-  And a HTTP call to "http://localhost:8000/" should result in status 302
+  And a HTTP call to "http://localhost:8000/" should result in status 200
