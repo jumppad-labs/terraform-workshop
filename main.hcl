@@ -72,7 +72,7 @@ resource "docs" "docs" {
     module.course.output.book
   ]
 
- assets = "${dir()}/assets"
+  assets = "${dir()}/assets"
 }
 
 resource "template" "vscode_jumppad" {
@@ -136,12 +136,12 @@ resource "container" "vscode" {
     remote = 8000
     host   = 8000
   }
-  
+
   health_check {
-    timeout = "300s"
-    
+    timeout = "100s"
+
     http {
-      address       = "http://localhost/docs/terraform_basics/introduction/what_is_terraform"
+      address       = "http://${resource.docs.docs.fqdn}/docs/terraform_basics/introduction/what_is_terraform"
       success_codes = [200]
     }
 
