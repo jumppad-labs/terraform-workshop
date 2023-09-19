@@ -20,7 +20,7 @@ jobs:
       
       - name: Run tests
         run: |
-          LOG_LEVEL=debug jumppad test --dont-destroy .
+          jumppad test --dont-destroy .
       
       - name: Show Logs
         if: failure()
