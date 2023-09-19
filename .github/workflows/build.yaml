@@ -24,3 +24,4 @@ jobs:
           jumppad purge
           LOG_LEVEL=debug jumppad test --dont-destroy .
           docker ps -a
+          docker logs docs.docs.jumppad.dev
