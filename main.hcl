@@ -138,7 +138,7 @@ resource "container" "vscode" {
   }
   
   health_check {
-    timeout = "120s"
+    timeout = "300s"
     
     http {
       address       = "http://localhost/docs/terraform_basics/introduction/what_is_terraform"
