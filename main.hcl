@@ -26,7 +26,7 @@ variable "vscode_token" {
 }
 
 resource "network" "main" {
-  subnet = "10.10.0.0/16"
+  subnet = "10.100.0.0/16"
 }
 
 resource "copy" "workspace" {
@@ -102,7 +102,7 @@ resource "container" "vscode" {
   }
 
   image {
-    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.2"
+    name = "ghcr.io/jumppad-labs/terraform-workshop:v0.3.3"
   }
 
   volume {
