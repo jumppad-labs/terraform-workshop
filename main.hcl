@@ -52,10 +52,6 @@ resource "docs" "docs" {
     id = resource.network.main.id
   }
 
-  image {
-    name = "ghcr.io/jumppad-labs/docs:v0.3.0"
-  }
-
   /* 
   have docs support multiple paths that get combined into docs?
   grabs all the books from the library and generates navigation
