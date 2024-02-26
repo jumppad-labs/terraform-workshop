@@ -1,0 +1,9 @@
+[Unit]
+Description=Jumppad Connector
+
+[Service]
+WorkingDirectory=/root
+ExecStart=/usr/local/bin/start-connector
+
+[Install]
+WantedBy=multi-user.target

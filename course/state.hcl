@@ -3,8 +3,8 @@ resource "chapter" "state" {
 
   tasks = {
     viewing_state = resource.task.viewing_state
-    list_state = resource.task.list_state
-    show_state = resource.task.show_state
+    list_state    = resource.task.list_state
+    show_state    = resource.task.show_state
   }
 
   page "viewing_state" {
@@ -21,10 +21,10 @@ resource "chapter" "state" {
 }
 
 resource "task" "viewing_state" {
-  prerequisites = resource.chapter.providers.tasks != null ? values(resource.chapter.providers.tasks).*.id : []
+  prerequisites = resource.chapter.providers.tasks != null ? values(resource.chapter.providers.tasks).*.meta.id : []
 
   config {
-    user = "root"
+    user   = "root"
     target = variable.terraform_target
   }
 
@@ -36,7 +36,7 @@ resource "task" "viewing_state" {
     }
 
     check {
-      script = file("checks/state/viewing_state/show_command")
+      script          = file("checks/state/viewing_state/show_command")
       failure_message = "The terraform show command was not used to view the state"
     }
 
@@ -49,7 +49,7 @@ resource "task" "viewing_state" {
     description = "The state is in a machine-readable format"
 
     check {
-      script = file("checks/state/viewing_state/json_flag")
+      script          = file("checks/state/viewing_state/json_flag")
       failure_message = "The terraform state was not viewed in a machine-readable format such as JSON"
     }
   }
@@ -61,7 +61,7 @@ resource "task" "list_state" {
   ]
 
   config {
-    user = "root"
+    user   = "root"
     target = variable.terraform_target
   }
 
@@ -69,7 +69,7 @@ resource "task" "list_state" {
     description = "The state for all resources is listed"
 
     check {
-      script = file("checks/state/list_state/list_command")
+      script          = file("checks/state/list_state/list_command")
       failure_message = "The terraform state list command was not used"
     }
 
@@ -85,7 +85,7 @@ resource "task" "show_state" {
   ]
 
   config {
-    user = "root"
+    user   = "root"
     target = variable.terraform_target
   }
 
@@ -93,7 +93,7 @@ resource "task" "show_state" {
     description = "The state of the Vault Docker container was shown"
 
     check {
-      script = file("checks/state/show_state/show_command")
+      script          = file("checks/state/show_state/show_command")
       failure_message = "The terraform state show command was not used to view the state for docker_container.vault"
     }
 

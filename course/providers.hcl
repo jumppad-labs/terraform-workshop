@@ -2,7 +2,7 @@ resource "chapter" "providers" {
   title = "Providers"
 
   tasks = {
-    install_provider = resource.task.install_provider
+    install_provider       = resource.task.install_provider
     provider_configuration = resource.task.provider_configuration
   }
 
@@ -16,10 +16,10 @@ resource "chapter" "providers" {
 }
 
 resource "task" "install_provider" {
-  prerequisites = resource.chapter.workflow.tasks != null ? values(resource.chapter.workflow.tasks).*.id : []
+  prerequisites = resource.chapter.workflow.tasks != null ? values(resource.chapter.workflow.tasks).*.meta.id : []
 
   config {
-    user = "root"
+    user   = "root"
     target = variable.terraform_target
   }
 
@@ -27,12 +27,12 @@ resource "task" "install_provider" {
     description = "The vault provider is added to the code"
 
     check {
-      script = file("checks/providers/install_provider/provider_added")
+      script          = file("checks/providers/install_provider/provider_added")
       failure_message = "The \"hashicorp/vault\" provider was not added to required_providers"
     }
 
     solve {
-      script = file("checks/providers/install_provider/solve")
+      script  = file("checks/providers/install_provider/solve")
       timeout = 120
     }
   }
@@ -41,7 +41,7 @@ resource "task" "install_provider" {
     description = "The vault provider is installed"
 
     check {
-      script = file("checks/providers/install_provider/provider_installed")
+      script          = file("checks/providers/install_provider/provider_installed")
       failure_message = "the vault provider was not correctly initialized"
     }
   }
@@ -53,7 +53,7 @@ resource "task" "provider_configuration" {
   ]
 
   config {
-    user = "root"
+    user   = "root"
     target = variable.terraform_target
   }
 
@@ -61,7 +61,7 @@ resource "task" "provider_configuration" {
     description = "The provider configuration is added"
 
     check {
-      script = file("checks/providers/provider_configuration/configuration_added")
+      script          = file("checks/providers/provider_configuration/configuration_added")
       failure_message = "The provider configuration does not specify the Vault address"
     }
 
