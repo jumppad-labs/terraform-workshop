@@ -24,17 +24,17 @@ test "browser" "welcome" {
 }
 
 test "docs_check" "installation" {
-  task = resource.task.manual_installation.id
+  task = resource.task.manual_installationmeta.id
 
   pass = false
 }
 
 test "docs_solve" "installation" {
-  task = resource.task.manual_installation.id
+  task = resource.task.manual_installationmeta.id
 }
 
 test "docs_check" "installation" {
-  task = resource.task.manual_installation.id
+  task = resource.task.manual_installationmeta.id
 
   pass = true
 }
@@ -67,9 +67,9 @@ scenario "Welcome Page" {
 then "i wait for the selector" { value = variable.selector_next_button }
 and "i wait for the text" { value = "Welcome to " }
 
-then i_run_the_check_script = resources.task.manual_installation.id
-and i_run_the_solve_script  = resources.task.manual_installation.id
-and i_run_the_check_script  = resources.task.manual_installation.id
+then i_run_the_check_script = resources.task.manual_installationmeta.id
+and i_run_the_solve_script  = resources.task.manual_installationmeta.id
+and i_run_the_check_script  = resources.task.manual_installationmeta.id
 
 then i_click_button = variable.selector_next_button
 and i_wait_for_text = "Welcome to "

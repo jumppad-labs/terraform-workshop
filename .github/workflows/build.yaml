@@ -20,7 +20,7 @@ jobs:
       
       - name: Run tests
         run: |
-          jumppad test --dont-destroy .
+          jumppad test .
       
       - name: Show Logs
         if: failure()

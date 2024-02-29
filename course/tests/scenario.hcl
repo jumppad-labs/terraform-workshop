@@ -3,7 +3,7 @@ resource "remote" "setup" {
 }
 
 resource "run_solve" "run_installation" {
-  task = blah.task.id
+  task = blah.taskmeta.id
 }
 
 local "homepage_selector" {
@@ -16,7 +16,7 @@ resource "navigate_to" "home_page" {
 }
 
 resource "check_script" "installation" {
-  id = bla.task.id
+  id = bla.taskmeta.id
 }
 
 scenario "Test installation setup" {

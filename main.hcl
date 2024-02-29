@@ -49,7 +49,7 @@ module "course" {
 
 resource "docs" "docs" {
   network {
-    id = resource.network.main.id
+    id = resource.network.main.meta.id
   }
 
   /* 
@@ -94,7 +94,7 @@ resource "template" "vscode_jumppad" {
 
 resource "container" "vscode" {
   network {
-    id = resource.network.main.id
+    id = resource.network.main.meta.id
   }
 
   image {

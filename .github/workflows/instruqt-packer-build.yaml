@@ -43,6 +43,6 @@ jobs:
         id: build
         run: |
           cd packer
-          packer init image.pkr.hcl
-          packer validate image.pkr.hcl
-          packer build image.pkr.hcl
+          packer init ./main.pkr.hcl
+          packer validate ./main.pkr.hcl
+          packer build -var-file ./main.pkrvars.hcl ./main.pkr.hcl

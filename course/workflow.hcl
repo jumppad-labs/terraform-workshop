@@ -73,7 +73,7 @@ resource "task" "terraform_init" {
 
 resource "task" "terraform_plan" {
   prerequisites = [
-    resource.task.terraform_init.id
+    resource.task.terraform_init.meta.id
   ]
 
   config {
@@ -97,7 +97,7 @@ resource "task" "terraform_plan" {
 
 resource task "terraform_apply" {
   prerequisites = [
-    resource.task.terraform_plan.id
+    resource.task.terraform_plan.meta.id
   ]
 
   config {
@@ -158,7 +158,7 @@ resource task "terraform_apply" {
 
 resource "task" "update_resources" {
   prerequisites = [
-    resource.task.terraform_apply.id
+    resource.task.terraform_apply.meta.id
   ]
 
   config {
@@ -210,7 +210,7 @@ resource "task" "update_resources" {
 
 resource "task" "terraform_destroy" {
   prerequisites = [
-    resource.task.update_resources.id
+    resource.task.update_resources.meta.id
   ]
 
   config {

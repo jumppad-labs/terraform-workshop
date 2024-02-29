@@ -57,7 +57,7 @@ resource "task" "viewing_state" {
 
 resource "task" "list_state" {
   prerequisites = [
-    resource.task.viewing_state.id
+    resource.task.viewing_state.meta.id
   ]
 
   config {
@@ -81,7 +81,7 @@ resource "task" "list_state" {
 
 resource "task" "show_state" {
   prerequisites = [
-    resource.task.list_state.id
+    resource.task.list_state.meta.id
   ]
 
   config {

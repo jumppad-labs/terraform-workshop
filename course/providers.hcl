@@ -49,7 +49,7 @@ resource "task" "install_provider" {
 
 resource "task" "provider_configuration" {
   prerequisites = [
-    resource.task.install_provider.id
+    resource.task.install_provider.meta.id
   ]
 
   config {
