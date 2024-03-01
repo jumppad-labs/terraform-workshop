@@ -4,6 +4,6 @@ jumppad_images = [
   "ghcr.io/jumppad-labs/docs:v0.4.0",
 ]
 
-jumppad_version = "0.7.0"
+jumppad_version = "0.9.1"
 
 project_id = "jumppad"
